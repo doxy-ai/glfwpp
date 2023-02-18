@@ -50,7 +50,7 @@ if (GLFWPP_BUILD_EXAMPLES)
             GIT_TAG 7c2b7514f64234756f7df051b9316f1e46f5a6e7)
         FetchContent_MakeAvailable(glew-cmake)
     endif()
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/imgui)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/extern/imgui)
 
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples)
 endif ()
