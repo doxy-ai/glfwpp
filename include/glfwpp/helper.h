@@ -70,4 +70,4 @@ namespace glfw
     }  // namespace detail
 }  // namespace glfw
 
-#endif  //GLFWPP_HELPER_H
+#endif  // GLFWPP_HELPER_H
