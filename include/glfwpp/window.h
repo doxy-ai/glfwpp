@@ -1057,9 +1057,9 @@ namespace glfw
         }
 #endif  // VK_VERSION_1_0
 #ifdef VULKAN_HPP
-        [[nodiscard]] vk::SurfaceKHR createSurface(
-                const vk::Instance& instance,
-                const std::optional<vk::AllocationCallbacks>& allocator = std::nullopt)
+        [[nodiscard]] VULKAN_HPP_NAMESPACE::SurfaceKHR createSurface(
+                const VULKAN_HPP_NAMESPACE::Instance& instance,
+                const std::optional<VULKAN_HPP_NAMESPACE::AllocationCallbacks>& allocator = std::nullopt)
         {
             VkSurfaceKHR surface;
             VkResult result;
@@ -1077,7 +1077,7 @@ namespace glfw
             {
                 throw Error("Could not create window surface");
             }
-            return static_cast<vk::SurfaceKHR>(surface);
+            return static_cast<VULKAN_HPP_NAMESPACE::SurfaceKHR>(surface);
         }
 #endif  // VULKAN_HPP
     };

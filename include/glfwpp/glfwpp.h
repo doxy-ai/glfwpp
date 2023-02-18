@@ -174,13 +174,13 @@ namespace glfw
 #endif  // VK_VERSION_1_0
 
 #ifdef VULKAN_HPP
-    [[nodiscard]] inline VkProc getInstanceProcAddress(const vk::Instance& instance, const char* procName)
+    [[nodiscard]] inline VkProc getInstanceProcAddress(const VULKAN_HPP_NAMESPACE::Instance& instance, const char* procName)
     {
         return getInstanceProcAddress(static_cast<VkInstance>(instance), procName);
     }
     [[nodiscard]] inline bool getPhysicalDevicePresentationSupport(
-            const vk::Instance& instance,
-            const vk::PhysicalDevice& device,
+            const VULKAN_HPP_NAMESPACE::Instance& instance,
+            const VULKAN_HPP_NAMESPACE::PhysicalDevice& device,
             uint32_t queueFamily)
     {
         return getPhysicalDevicePresentationSupport(static_cast<VkInstance>(instance), static_cast<VkPhysicalDevice>(device), queueFamily);
