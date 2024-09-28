@@ -14,7 +14,7 @@ target_link_libraries(GLFWPP INTERFACE eventpp::eventpp)
 
 #Add GFLW
 if (CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
-    target_include_directories(GLFWPP INTERFACE "${EMSCRIPTEN_ROOT_PATH}/system/include")
+    # target_include_directories(GLFWPP INTERFACE "${EMSCRIPTEN_ROOT_PATH}/system/include")
     set(CMAKE_CXX_LINKER_WRAPPER_FLAG "")
     target_link_options(GLFWPP INTERFACE "LINKER:-sUSE_GLFW=3")
 else()

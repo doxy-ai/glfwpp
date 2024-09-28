@@ -81,10 +81,8 @@ namespace glfw
 
     struct GlfwLibrary
     {
-    private:
         GlfwLibrary() = default;
 
-    public:
         ~GlfwLibrary()
         {
             glfwTerminate();
