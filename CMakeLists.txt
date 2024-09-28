@@ -15,29 +15,33 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
     set(CMAKE_CXX_LINKER_WRAPPER_FLAG "")
     target_link_options(GLFWPP INTERFACE "LINKER:-sUSE_GLFW=3")
 else()
-    # try to find with cmake
-    find_package(glfw3 CONFIG)
-    if(glfw3_FOUND)
-        target_link_libraries(GLFWPP INTERFACE glfw)
-    else()
-        # then try with pkg-config (in case cmake config files are missing for some reason)
-        find_package(PkgConfig REQUIRED)
-        pkg_check_modules(GLFW IMPORTED_TARGET glfw3)
-        if(GLFW_FOUND)
+    if(NOT TARGET glfw)
+        # try to find with cmake
+        find_package(glfw3 CONFIG)
+        if(glfw3_FOUND)
             target_link_libraries(GLFWPP INTERFACE glfw)
         else()
-            # then build from source if needed
-            include(FetchContent)
-            FetchContent_Declare(
-                glfw
-                GIT_REPOSITORY https://github.com/glfw/glfw.git
-                GIT_TAG 3.3.8)
-            set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-            set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-            set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-            FetchContent_MakeAvailable(glfw)
-            target_link_libraries(GLFWPP INTERFACE glfw)
+            # then try with pkg-config (in case cmake config files are missing for some reason)
+            find_package(PkgConfig REQUIRED)
+            pkg_check_modules(GLFW IMPORTED_TARGET glfw3)
+            if(GLFW_FOUND)
+                target_link_libraries(GLFWPP INTERFACE glfw)
+            else()
+                # then build from source if needed
+                include(FetchContent)
+                FetchContent_Declare(
+                    glfw
+                    GIT_REPOSITORY https://github.com/glfw/glfw.git
+                    GIT_TAG 3.3.8)
+                set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+                set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+                set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+                FetchContent_MakeAvailable(glfw)
+                target_link_libraries(GLFWPP INTERFACE glfw)
+            endif()
         endif()
+    else()
+        target_link_libraries(GLFWPP INTERFACE glfw)
     endif()
 endif()
 
