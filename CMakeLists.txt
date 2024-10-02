@@ -9,6 +9,9 @@ add_library(GLFWPP INTERFACE)
 target_include_directories(GLFWPP INTERFACE include)
 target_compile_features(GLFWPP INTERFACE cxx_std_17)
 
+add_subdirectory(extern/eventpp)
+target_link_libraries(GLFWPP INTERFACE eventpp::eventpp)
+
 #Add GFLW
 if (CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
     target_include_directories(GLFWPP INTERFACE "${EMSCRIPTEN_ROOT_PATH}/system/include")

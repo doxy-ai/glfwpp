@@ -2,29 +2,21 @@
 #define GLFWPP_EVENT_H
 
 #include <GLFW/glfw3.h>
+#include <eventpp/callbacklist.h>
 #include <functional>
 #include <list>
 
 namespace glfw
 {
     template<typename... Args>
-    class Event
-    {
-    private:
-        std::function<void(Args...)> _handler;
-
-    public:
+    struct Event: public eventpp::CallbackList<void(Args...)> {
+        using Super = eventpp::CallbackList<void(Args...)>;
+        using Super::Super;
+        
         template<typename CallbackT>
-        void setCallback(CallbackT&& callback_)
-        {
-            _handler = std::forward<CallbackT>(callback_);
-        }
-        void operator()(Args... args_)
-        {
-            if(_handler)
-            {
-                _handler(args_...);
-            }
+        void setCallback(CallbackT&& callback) {
+            static_cast<Super&>(*this) = {};
+            Super::append(std::move(callback));
         }
     };
 
